@@ -14,7 +14,7 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: sistema-nginx
