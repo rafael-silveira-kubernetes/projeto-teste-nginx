@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sistema-nginx-deployment
+spec:
+  template:
+    metadata:
+      name: sistema-nginx
+      labels:
+        app: sistema-nginx
+    spec:
+      containers:
+        - name: sistema-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sistema-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-sistema-nginx
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 30000
+      targetPort: 80
+  selector:
+    app: sistema-nginx
